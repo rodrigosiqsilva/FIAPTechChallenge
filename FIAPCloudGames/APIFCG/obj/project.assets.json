@@ -88,6 +88,16 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "FIAP.PosTech.ArqSistemas.CloudGames.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/FIAP.PosTech.ArqSistemas.CloudGames.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FIAP.PosTech.ArqSistemas.CloudGames.Domain.dll": {}
+        }
       }
     }
   },
@@ -439,10 +449,16 @@
         "swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "FIAP.PosTech.ArqSistemas.CloudGames.Domain/1.0.0": {
+      "type": "project",
+      "path": "../FIAP.PosTech.ArqSistemas.CloudGames.Domain/FIAP.PosTech.ArqSistemas.CloudGames.Domain.csproj",
+      "msbuildProject": "../FIAP.PosTech.ArqSistemas.CloudGames.Domain/FIAP.PosTech.ArqSistemas.CloudGames.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "FIAP.PosTech.ArqSistemas.CloudGames.Domain >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.6.2"
     ]
   },
@@ -453,9 +469,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rodri\\OneDrive\\Área de Trabalho\\Pós Graduação\\TechChallenge\\FIAPCloudGames\\APIFCG\\APIFCG.csproj",
-      "projectName": "APIFCG",
-      "projectPath": "C:\\Users\\rodri\\OneDrive\\Área de Trabalho\\Pós Graduação\\TechChallenge\\FIAPCloudGames\\APIFCG\\APIFCG.csproj",
+      "projectUniqueName": "C:\\Users\\rodri\\OneDrive\\Área de Trabalho\\Pós Graduação\\TechChallenge\\FIAPCloudGames\\APIFCG\\FIAP.PosTech.ArqSistemas.CloudGames.Api.csproj",
+      "projectName": "FIAP.PosTech.ArqSistemas.CloudGames.Api",
+      "projectPath": "C:\\Users\\rodri\\OneDrive\\Área de Trabalho\\Pós Graduação\\TechChallenge\\FIAPCloudGames\\APIFCG\\FIAP.PosTech.ArqSistemas.CloudGames.Api.csproj",
       "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\rodri\\OneDrive\\Área de Trabalho\\Pós Graduação\\TechChallenge\\FIAPCloudGames\\APIFCG\\obj\\",
       "projectStyle": "PackageReference",
@@ -477,7 +493,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\rodri\\OneDrive\\Área de Trabalho\\Pós Graduação\\TechChallenge\\FIAPCloudGames\\FIAP.PosTech.ArqSistemas.CloudGames.Domain\\FIAP.PosTech.ArqSistemas.CloudGames.Domain.csproj": {
+              "projectPath": "C:\\Users\\rodri\\OneDrive\\Área de Trabalho\\Pós Graduação\\TechChallenge\\FIAPCloudGames\\FIAP.PosTech.ArqSistemas.CloudGames.Domain\\FIAP.PosTech.ArqSistemas.CloudGames.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

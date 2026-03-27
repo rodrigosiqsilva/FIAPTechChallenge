@@ -1,4 +1,9 @@
 {
-  "ExpandedNodes": [],
+  "ExpandedNodes": [
+    "",
+    "\\.github",
+    "\\FIAPCloudGames"
+  ],
+  "SelectedNode": "\\FIAPCloudGames\\FIAPCloudGames.sln",
   "PreviewInSolutionExplorer": false
 }
