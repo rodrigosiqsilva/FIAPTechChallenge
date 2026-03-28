@@ -3,7 +3,7 @@ using FIAP.PosTech.ArqSistemas.CloudGames.Domain;
 
 namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces
 {
-    public interface IAdministrador
+    public interface IAdministradorService
     {
         Task IncluirAsync(Administrador administrador);
 

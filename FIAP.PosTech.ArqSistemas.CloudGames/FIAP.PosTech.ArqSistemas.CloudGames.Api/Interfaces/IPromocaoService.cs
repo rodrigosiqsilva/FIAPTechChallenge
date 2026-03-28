@@ -2,7 +2,7 @@
 
 namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces
 {
-    public interface IPromocao
+    public interface IPromocaoService
     {
         Task IncluirAsync(Promocao promocao);
 
