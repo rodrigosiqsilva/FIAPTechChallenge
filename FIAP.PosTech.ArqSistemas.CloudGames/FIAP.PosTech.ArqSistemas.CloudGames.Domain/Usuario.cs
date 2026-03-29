@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain
 {
-    public class Usuario : PessoaFisica
+    public class Usuario(int id, string nome, string email, string senha, byte adminitrador) : 
+            PessoaFisica(id, nome, email, senha, adminitrador)
     {
     }
 }

@@ -1,11 +1,11 @@
 ﻿namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain
 {
-    public class PessoaFisica
+    public class PessoaFisica(int id, string nome, string email, string senha, byte adminitrador)
     {
-        public int Id { get; set; }
-        public required string Nome { get; set; }
-        public required string Email { get; set; }
-        public required string Senha { get; set; }
-        public byte Administrador { get; set; }
+        public int Id { get; set; } = id;
+        public string Nome { get; set; } = nome;
+        public string Email { get; set; } = email;
+        public string Senha { get; set; } = senha;
+        public byte Administrador { get; set; } = adminitrador;
     }
 }

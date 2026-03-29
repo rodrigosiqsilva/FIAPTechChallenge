@@ -12,6 +12,6 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces
 
         Task<Usuario> BuscarPorIdAsync(int id);
 
-        Task<List<Usuario>> BuscarPorTodosAsync();
+        Task<List<Usuario>> BuscarTodosAsync();
     }
 }
