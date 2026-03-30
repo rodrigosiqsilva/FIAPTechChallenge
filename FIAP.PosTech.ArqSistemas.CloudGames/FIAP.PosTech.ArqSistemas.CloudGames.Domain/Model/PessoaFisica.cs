@@ -1,4 +1,4 @@
-﻿namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain
+﻿namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model
 {
     public class PessoaFisica(int id, string nome, string email, string senha, byte adminitrador)
     {

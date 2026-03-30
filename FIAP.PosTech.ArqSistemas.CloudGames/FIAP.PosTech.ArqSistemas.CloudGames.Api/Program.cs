@@ -2,6 +2,8 @@ using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Middleware;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Services;
+using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Validation;
+using FluentValidation;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
@@ -66,6 +68,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddTransient<IUsuarioService, UsuarioService>();
 builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
 builder.Services.AddTransient(typeof(BaseLogger<>));
+builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>();
 #endregion
 
 var app = builder.Build();

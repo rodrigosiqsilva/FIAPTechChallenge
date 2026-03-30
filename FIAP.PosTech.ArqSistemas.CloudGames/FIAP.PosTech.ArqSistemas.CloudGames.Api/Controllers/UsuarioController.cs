@@ -1,8 +1,10 @@
 ﻿using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Services;
-using FIAP.PosTech.ArqSistemas.CloudGames.Domain;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Enums;
+using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
+using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Validation;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net;
@@ -22,19 +24,33 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
         private readonly BaseLogger<UsuarioController> _logger = logger;
 
         [HttpPost("IncluirAsync")]
-        public IActionResult IncluirAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator, [FromBody] Usuario usuario)
+        public async Task<IActionResult> IncluirAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator, [FromBody] Usuario usuario, 
+            [FromServices] IValidator<UsuarioValidator> validator)
         {
+
+            if (usuario == null)
+            {
+                return BadRequest("Objeto usuário não enviado no body do request."); 
+            }
+
+            var validationResult = await validator.ValidateAsync((IValidationContext)usuario);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors); 
+            }
+
             return Accepted(usuario);
         }
 
         [HttpPut("AtualizarAsync")]
-        public IActionResult AtualizarAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator, [FromBody] Usuario usuario)
+        public async Task<IActionResult> AtualizarAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator, [FromBody] Usuario usuario)
         {
             return NoContent(); // Retorna 204 (sucesso sem conteúdo)
         }
 
         [HttpDelete("ExcluirAsync")]
-        public IActionResult ExcluirAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator, int id)
+        public async Task<IActionResult> ExcluirAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator, int id)
         {
             return NoContent(); // Retorna 204 (sucesso sem conteúdo)
         }

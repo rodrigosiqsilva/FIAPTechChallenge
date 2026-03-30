@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain
+namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model
 {
     public class Jogo
     {

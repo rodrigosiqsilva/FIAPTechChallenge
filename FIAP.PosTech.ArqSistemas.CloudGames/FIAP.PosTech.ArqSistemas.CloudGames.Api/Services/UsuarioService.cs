@@ -1,7 +1,7 @@
 ﻿using FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces;
-using FIAP.PosTech.ArqSistemas.CloudGames.Domain;
+using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
 using Microsoft.Extensions.Logging;
 
 namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Services
