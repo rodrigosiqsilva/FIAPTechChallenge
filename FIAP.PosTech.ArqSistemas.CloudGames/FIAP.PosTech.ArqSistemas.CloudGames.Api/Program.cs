@@ -2,15 +2,17 @@ using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Middleware;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Services;
+using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Validation;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -69,6 +71,8 @@ builder.Services.AddTransient<IUsuarioService, UsuarioService>();
 builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
 builder.Services.AddTransient(typeof(BaseLogger<>));
 builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>();
+//builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+//builder.Services.AddScoped<IValidator<Usuario>, UsuarioValidator>();
 #endregion
 
 var app = builder.Build();
