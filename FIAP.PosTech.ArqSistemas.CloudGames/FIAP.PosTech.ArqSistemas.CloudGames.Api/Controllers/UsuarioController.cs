@@ -24,35 +24,19 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
         private readonly BaseLogger<UsuarioController> _logger = logger;
 
         [HttpPost("IncluirAsync")]
-        public IActionResult Incluir([FromServices] ICorrelationIdGenerator _correlationIdGenerator, [FromBody] Usuario usuario)
+        public IActionResult Incluir([FromServices] ICorrelationIdGenerator _correlationIdGenerator, [FromBody] Usuario usuario,
+            [FromServices] IValidator<Usuario> validator)
         {
+            var validationResult = validator.Validate(usuario);
 
-            if (usuario == null)
+            if (!validationResult.IsValid)
             {
-                return BadRequest("Objeto usuário não enviado no body do request.");
+                // Retorna os erros formatados
+                return BadRequest(validationResult.Errors);
             }
 
             return Accepted(usuario);
         }
-        //public IActionResult Incluir([FromServices] ICorrelationIdGenerator _correlationIdGenerator, [FromBody] Usuario usuario,
-        //    [FromServices] IValidator<Usuario> validator)
-        //{
-
-        //    if (usuario == null)
-        //    {
-        //        return BadRequest("Objeto usuário não enviado no body do request.");
-        //    }
-
-        //    var validationResult = validator.Validate(usuario);
-
-        //    if (!validationResult.IsValid)
-        //    {
-        //        // Retorna os erros formatados
-        //        return BadRequest(validationResult.Errors);
-        //    }
-
-        //    return Accepted(usuario);
-        //}
 
         [HttpPut("AtualizarAsync")]
         public async Task<IActionResult> AtualizarAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator, [FromBody] Usuario usuario)
