@@ -18,14 +18,20 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Services
             throw new NotImplementedException();
         }
 
-        Task<Usuario> IUsuarioService.BuscarPorIdAsync(int id)
+        async Task<Usuario> IUsuarioService.BuscarPorIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var usuario = new Usuario { Nome = "Rodrigo Siqueira", Email = "rodrigosiqueirasilva@hotmail.com", Senha = "xxxx", Id = 1, Administrador = true };
+            return usuario;
         }
 
-        Task<List<Usuario>> IUsuarioService.BuscarTodosAsync()
+        async Task<List<Usuario>> IUsuarioService.BuscarTodosAsync()
         {
-            throw new NotImplementedException();
+            var usuarios = new List<Usuario>();
+
+            usuarios.Add(new Usuario { Nome = "Rodrigo Siqueira", Email = "rodrigosiqueirasilva@hotmail.com", Senha = "xxxx", Id = 1, Administrador = true});
+            usuarios.Add(new Usuario { Nome = "Renata Punzi Monteiro", Email = "fisioterapeuta@hotmail.com", Senha = "yyy", Id = 2, Administrador = false });
+
+            return usuarios;
         }
 
         Task IUsuarioService.ExcluirAsync(int id)

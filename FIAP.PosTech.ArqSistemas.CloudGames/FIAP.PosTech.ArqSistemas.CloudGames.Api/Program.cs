@@ -5,7 +5,10 @@ using FIAP.PosTech.ArqSistemas.CloudGames.Api.Services;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Validation;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +63,32 @@ builder.Services.AddSwaggerGen(c =>
     c.SchemaFilter<EnumSchemaFilter>();
 });
 
+#region
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = false;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = false,
+        ValidateLifetime = false,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
+
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+
+#endregion
+
 #region DI
 builder.Services.AddTransient<IUsuarioService, UsuarioService>();
 builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
@@ -80,6 +109,7 @@ app.UseCorrelationMiddleware();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -5,8 +5,10 @@ using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Enums;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Validation;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -24,7 +26,8 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
         private readonly BaseLogger<UsuarioController> _logger = logger;
 
         [HttpPost("IncluirAsync")]
-        public IActionResult Incluir([FromServices] ICorrelationIdGenerator _correlationIdGenerator, [FromBody] Usuario usuario,
+        [Authorize(Policy = "Admin")]
+        public IActionResult Incluir([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] Usuario usuario,
             [FromServices] IValidator<Usuario> validator)
         {
             var validationResult = validator.Validate(usuario);
@@ -39,20 +42,29 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
         }
 
         [HttpPut("AtualizarAsync")]
-        public async Task<IActionResult> AtualizarAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator, [FromBody] Usuario usuario)
+        public IActionResult Atualizar([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] Usuario usuario,
+            [FromServices] IValidator<Usuario> validator)
         {
-            return NoContent(); // Retorna 204 (sucesso sem conteúdo)
+            var validationResult = validator.Validate(usuario);
+
+            if (!validationResult.IsValid)
+            {
+                // Retorna os erros formatados
+                return BadRequest(validationResult.Errors);
+            }
+
+            return NoContent();
         }
 
         [HttpDelete("ExcluirAsync")]
-        public async Task<IActionResult> ExcluirAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator, int id)
+        public IActionResult Excluir([FromServices] ICorrelationIdGenerator correlationIdGenerator, int id)
         {
             return NoContent(); // Retorna 204 (sucesso sem conteúdo)
         }
 
         [HttpGet("BuscarPorIdAsync/{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> BuscarPorIdAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator, int id, StatusCompra status)
+        public async Task<IActionResult> BuscarPorIdAsync([FromServices] ICorrelationIdGenerator correlationIdGenerator, int id)
         {
 
             _logger.LogWarning("Rodrigo Siqueira");
@@ -67,8 +79,8 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
         }
 
         [HttpGet("BuscarTodosAsync")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> BuscarPorTodosAsync([FromServices] ICorrelationIdGenerator _correlationIdGenerator)
+        [Authorize(Policy = "Admin")]
+        public async Task<IActionResult> BuscarPorTodosAsync([FromServices] ICorrelationIdGenerator correlationIdGenerator)
         {
 
             _logger.LogInformation("Rodrigo Siqueira");
