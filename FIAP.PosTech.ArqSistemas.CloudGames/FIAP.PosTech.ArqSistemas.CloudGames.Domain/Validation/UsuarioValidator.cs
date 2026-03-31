@@ -21,7 +21,7 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain.Validation
                                  .Must(senha => ValidarSenha(senha)).WithMessage("A senha deve ser segura (mínimo de 8 caracteres com números, letras e caracteres especiais).");
 
             RuleFor(x => x.Email).NotEmpty().WithMessage("O e-mail do usuário é obrigatório.")
-                                 .EmailAddress().WithMessage("O e-mail do usuário deve ser válido."); 
+                                 .EmailAddress().WithMessage("O e-mail do usuário deve ser válido.");
         }
 
         public static bool ValidarSenha(string senha)
