@@ -13,6 +13,7 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain.Validation
     {
         public UsuarioValidator()
         {
+            RuleFor(x => x).NotNull().WithMessage("O objeto Usuario não pode ser nulo.");
 
             RuleFor(x => x.Nome).NotEmpty().WithMessage("O nome do usuário é obrigatório.");
 
