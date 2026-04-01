@@ -1,4 +1,6 @@
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra;
+using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Documentation;
+using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Log;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Middleware;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Services;

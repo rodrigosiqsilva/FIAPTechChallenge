@@ -1,16 +1,10 @@
 ﻿using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces;
-using FIAP.PosTech.ArqSistemas.CloudGames.Api.Services;
-using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Enums;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
-using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Validation;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
 {

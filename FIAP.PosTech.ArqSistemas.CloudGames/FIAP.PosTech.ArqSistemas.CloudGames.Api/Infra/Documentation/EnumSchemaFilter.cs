@@ -2,7 +2,7 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra
+namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Documentation
 {
     public class EnumSchemaFilter : ISchemaFilter
     {

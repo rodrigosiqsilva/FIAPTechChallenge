@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model
+﻿namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model
 {
     public class Promocao
     {
         public int Id { get; set; }
         public required string Descricao { get; set; }
-        public byte Ativa { get; set; }
+        public bool Ativa { get; set; }
     }
 }
