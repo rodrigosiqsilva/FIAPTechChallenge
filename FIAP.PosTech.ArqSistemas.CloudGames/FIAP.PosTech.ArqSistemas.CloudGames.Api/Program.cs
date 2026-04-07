@@ -4,7 +4,6 @@ using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Log;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Middleware;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Repository;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces;
-using FIAP.PosTech.ArqSistemas.CloudGames.Api.Services;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Validation;
 using FluentValidation;
@@ -98,7 +97,6 @@ builder.Services.AddAuthorizationBuilder()
 #endregion
 
 #region DI
-builder.Services.AddTransient<IPessoaFisicaService, PessoaFisicaService>();
 builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
 builder.Services.AddTransient(typeof(BaseLogger<>));
 builder.Services.AddTransient<IValidator<PessoaFisica>, PessoaFisicaValidator>();
