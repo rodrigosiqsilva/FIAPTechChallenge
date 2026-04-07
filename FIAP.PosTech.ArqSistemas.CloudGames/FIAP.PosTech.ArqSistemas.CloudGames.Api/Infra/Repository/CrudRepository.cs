@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Repository
 {
-    public class CrudServiceRepository<T> : ICrudRepository<T> where T : ClasseBase
+    public class CrudRepository<T> : ICrudRepository<T> where T : ClasseBase
     {
         protected ApplicationDbContext _context;
         protected DbSet<T> _dbSet;
 
-        public CrudServiceRepository(ApplicationDbContext context)
+        public CrudRepository(ApplicationDbContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();

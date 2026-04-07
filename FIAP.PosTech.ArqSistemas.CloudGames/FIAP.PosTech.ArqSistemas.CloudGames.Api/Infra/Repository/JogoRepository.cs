@@ -1,11 +1,12 @@
 ﻿using FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
 
+
 namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Repository
 {
-    public class PessoaFisicaRepository : CrudRepository<PessoaFisica>, IPessoaFisicaRepository
+    public class JogoRepository : CrudRepository<Jogo>, IJogoRepository
     {
-        public PessoaFisicaRepository(ApplicationDbContext context) : base(context)
+        public JogoRepository(ApplicationDbContext context) : base(context)
         {
         }
     }
