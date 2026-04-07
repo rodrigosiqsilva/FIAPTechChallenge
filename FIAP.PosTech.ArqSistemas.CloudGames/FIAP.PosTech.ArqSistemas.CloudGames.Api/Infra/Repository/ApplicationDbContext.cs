@@ -13,6 +13,11 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Repository
             _connectionString = connectionString;      
         }
 
+        public ApplicationDbContext()
+        {
+                
+        }
+
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Administrador> Administrador { get; set; }
         public DbSet<Promocao> Promocao { get; set; }
