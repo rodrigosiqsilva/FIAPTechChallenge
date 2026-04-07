@@ -10,81 +10,107 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PessoaFisicaController(IPessoaFisicaService usuarioService, ICorrelationIdGenerator correlationIdGenerator,
+    public class PessoaFisicaController(IPessoaFisicaRepository pessoaFisicaRepository, ICorrelationIdGenerator correlationIdGenerator,
         BaseLogger<PessoaFisicaController> logger) :
         ControllerBase
     {
-
-        private readonly IPessoaFisicaService _usuarioService = usuarioService;
+        private readonly IPessoaFisicaRepository _pessoaFisicaRepository = pessoaFisicaRepository;
         private readonly ICorrelationIdGenerator _correlationIdGenerator = correlationIdGenerator;
         private readonly BaseLogger<PessoaFisicaController> _logger = logger;
 
-        [HttpPost("IncluirAsync")]
+        [HttpPost("Incluir")]
         [Authorize(Policy = "Admin")]
         public IActionResult Incluir([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] PessoaFisica pessoaFisica,
             [FromServices] IValidator<PessoaFisica> validator)
         {
-            var validationResult = validator.Validate(pessoaFisica);
-
-            if (!validationResult.IsValid)
+            try
             {
-                // Retorna os erros formatados
-                return BadRequest(validationResult.Errors);
+
+                var validationResult = validator.Validate(pessoaFisica);
+
+                if (!validationResult.IsValid)
+                {
+                    return BadRequest(validationResult.Errors);
+                }
+
+                _pessoaFisicaRepository.Incluir(pessoaFisica);
+
+                return Ok();
+
             }
-
-            return Accepted(pessoaFisica);
-        }
-
-        [HttpPut("AtualizarAsync")]
-        public IActionResult Atualizar([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] PessoaFisica pessoaFisica,
-            [FromServices] IValidator<PessoaFisica> validator)
-        {
-            var validationResult = validator.Validate(pessoaFisica);
-
-            if (!validationResult.IsValid)
+            catch (Exception ex)
             {
-                // Retorna os erros formatados
-                return BadRequest(validationResult.Errors);
+                return BadRequest(ex);
             }
-
-            return NoContent();
         }
 
-        [HttpDelete("ExcluirAsync")]
-        public IActionResult Excluir([FromServices] ICorrelationIdGenerator correlationIdGenerator, int id)
-        {
-            return NoContent(); // Retorna 204 (sucesso sem conteúdo)
-        }
 
-        [HttpGet("BuscarPorIdAsync/{id}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> BuscarPorIdAsync([FromServices] ICorrelationIdGenerator correlationIdGenerator, int id)
-        {
+        //[HttpPost("IncluirAsync")]
+        //[Authorize(Policy = "Admin")]
+        //public IActionResult Incluir([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] PessoaFisica pessoaFisica,
+        //    [FromServices] IValidator<PessoaFisica> validator)
+        //{
+        //    var validationResult = validator.Validate(pessoaFisica);
 
-            _logger.LogWarning("Rodrigo Siqueira");
-            
+        //    if (!validationResult.IsValid)
+        //    {
+        //        // Retorna os erros formatados
+        //        return BadRequest(validationResult.Errors);
+        //    }
 
-            var result = await _usuarioService.BuscarPorIdAsync(id);
+        //    return Accepted(pessoaFisica);
+        //}
 
-            return result != null ? Ok(result) : NotFound();
+        //[HttpPut("AtualizarAsync")]
+        //public IActionResult Atualizar([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] PessoaFisica pessoaFisica,
+        //    [FromServices] IValidator<PessoaFisica> validator)
+        //{
+        //    var validationResult = validator.Validate(pessoaFisica);
 
-            //var usuario = new Usuario(1, "Rodrigo Siqueira Silva", "rodrigosiqueirasilva@hormail.com", "123@teste", 0);
-            //return Ok(usuario);
-        }
+        //    if (!validationResult.IsValid)
+        //    {
+        //        // Retorna os erros formatados
+        //        return BadRequest(validationResult.Errors);
+        //    }
 
-        [HttpGet("BuscarTodosAsync")]
-        [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> BuscarPorTodosAsync([FromServices] ICorrelationIdGenerator correlationIdGenerator)
-        {
+        //    return NoContent();
+        //}
 
-            _logger.LogInformation("Rodrigo Siqueira");
+        //[HttpDelete("ExcluirAsync")]
+        //public IActionResult Excluir([FromServices] ICorrelationIdGenerator correlationIdGenerator, int id)
+        //{
+        //    return NoContent(); // Retorna 204 (sucesso sem conteúdo)
+        //}
 
-            var result = await _usuarioService.BuscarTodosAsync();
+        //[HttpGet("BuscarPorIdAsync/{id}")]
+        //[ProducesResponseType((int)HttpStatusCode.OK)]
+        //public async Task<IActionResult> BuscarPorIdAsync([FromServices] ICorrelationIdGenerator correlationIdGenerator, int id)
+        //{
 
-            return result != null ? Ok(result) : NotFound();
+        //    _logger.LogWarning("Rodrigo Siqueira");
 
-            //var usuario = new Usuario(1, "Rodrigo Siqueira Silva", "rodrigosiqueirasilva@hormail.com", "123@teste", 0);
-            //return Ok(usuario);
-        }
+
+        //    var result = await _usuarioService.BuscarPorIdAsync(id);
+
+        //    return result != null ? Ok(result) : NotFound();
+
+        //    //var usuario = new Usuario(1, "Rodrigo Siqueira Silva", "rodrigosiqueirasilva@hormail.com", "123@teste", 0);
+        //    //return Ok(usuario);
+        //}
+
+        //[HttpGet("BuscarTodosAsync")]
+        //[Authorize(Policy = "Admin")]
+        //public async Task<IActionResult> BuscarPorTodosAsync([FromServices] ICorrelationIdGenerator correlationIdGenerator)
+        //{
+
+        //    _logger.LogInformation("Rodrigo Siqueira");
+
+        //    var result = await _usuarioService.BuscarTodosAsync();
+
+        //    return result != null ? Ok(result) : NotFound();
+
+        //    //var usuario = new Usuario(1, "Rodrigo Siqueira Silva", "rodrigosiqueirasilva@hormail.com", "123@teste", 0);
+        //    //return Ok(usuario);
+        //}
     }
 }

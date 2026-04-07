@@ -15,7 +15,12 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Repository
 
         public ApplicationDbContext()
         {
-                
+            IConfiguration configuration = new ConfigurationBuilder()
+              .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+              .AddJsonFile("appsettings.json")
+              .Build();
+
+            _connectionString = configuration.GetConnectionString("ConnectionString");
         }
 
         public DbSet<PessoaFisica> PessoaFisica { get; set; }

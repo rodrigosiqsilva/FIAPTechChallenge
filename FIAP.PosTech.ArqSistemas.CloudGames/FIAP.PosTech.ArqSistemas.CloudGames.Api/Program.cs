@@ -102,6 +102,9 @@ builder.Services.AddTransient<IPessoaFisicaService, PessoaFisicaService>();
 builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
 builder.Services.AddTransient(typeof(BaseLogger<>));
 builder.Services.AddTransient<IValidator<PessoaFisica>, PessoaFisicaValidator>();
+builder.Services.AddTransient<IPessoaFisicaRepository, PessoaFisicaRepository>();
+builder.Services.AddTransient<IJogoRepository, JogoRepository>();
+builder.Services.AddTransient<IPromocaoRepository, PromocaoRepository>();
 #endregion
 
 
