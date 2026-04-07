@@ -18,8 +18,7 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Repository
                 
         }
 
-        public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<Administrador> Administrador { get; set; }
+        public DbSet<PessoaFisica> PessoaFisica { get; set; }
         public DbSet<Promocao> Promocao { get; set; }
         public DbSet<Jogo> Jogo { get; set; }
 

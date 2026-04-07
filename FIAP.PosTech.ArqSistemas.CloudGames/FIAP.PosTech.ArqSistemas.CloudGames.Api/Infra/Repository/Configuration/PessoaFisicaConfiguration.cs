@@ -1,13 +1,12 @@
 ﻿using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
 namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Repository.Configuration
 {
-    public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
+    public class PessoaFisicaConfiguration : IEntityTypeConfiguration<PessoaFisica>
     {
-        public void Configure(EntityTypeBuilder<Usuario> builder)
+        public void Configure(EntityTypeBuilder<PessoaFisica> builder)
         {
             builder.ToTable("PessoaFisica");
             builder.HasKey(p => p.Id);

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace FIAP.PosTech.ArqSistemas.CloudGames.Domain.Validation
 {
-    public class UsuarioValidator : AbstractValidator<Usuario>
+    public class PessoaFisicaValidator : AbstractValidator<PessoaFisica>
     {
-        public UsuarioValidator()
+        public PessoaFisicaValidator()
         {
             RuleFor(x => x).NotNull().WithMessage("O objeto Usuario não pode ser nulo.");
 

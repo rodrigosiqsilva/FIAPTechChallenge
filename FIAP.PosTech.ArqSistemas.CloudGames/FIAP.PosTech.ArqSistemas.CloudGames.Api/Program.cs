@@ -98,10 +98,10 @@ builder.Services.AddAuthorizationBuilder()
 #endregion
 
 #region DI
-builder.Services.AddTransient<IUsuarioService, UsuarioService>();
+builder.Services.AddTransient<IPessoaFisicaService, PessoaFisicaService>();
 builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
 builder.Services.AddTransient(typeof(BaseLogger<>));
-builder.Services.AddTransient<IValidator<Usuario>, UsuarioValidator>();
+builder.Services.AddTransient<IValidator<PessoaFisica>, PessoaFisicaValidator>();
 #endregion
 
 

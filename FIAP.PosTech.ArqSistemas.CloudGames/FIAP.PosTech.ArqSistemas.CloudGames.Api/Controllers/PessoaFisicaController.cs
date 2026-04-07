@@ -10,21 +10,21 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UsuarioController(IUsuarioService usuarioService, ICorrelationIdGenerator correlationIdGenerator,
-        BaseLogger<UsuarioController> logger) :
+    public class PessoaFisicaController(IPessoaFisicaService usuarioService, ICorrelationIdGenerator correlationIdGenerator,
+        BaseLogger<PessoaFisicaController> logger) :
         ControllerBase
     {
 
-        private readonly IUsuarioService _usuarioService = usuarioService;
+        private readonly IPessoaFisicaService _usuarioService = usuarioService;
         private readonly ICorrelationIdGenerator _correlationIdGenerator = correlationIdGenerator;
-        private readonly BaseLogger<UsuarioController> _logger = logger;
+        private readonly BaseLogger<PessoaFisicaController> _logger = logger;
 
         [HttpPost("IncluirAsync")]
         [Authorize(Policy = "Admin")]
-        public IActionResult Incluir([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] Usuario usuario,
-            [FromServices] IValidator<Usuario> validator)
+        public IActionResult Incluir([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] PessoaFisica pessoaFisica,
+            [FromServices] IValidator<PessoaFisica> validator)
         {
-            var validationResult = validator.Validate(usuario);
+            var validationResult = validator.Validate(pessoaFisica);
 
             if (!validationResult.IsValid)
             {
@@ -32,14 +32,14 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
                 return BadRequest(validationResult.Errors);
             }
 
-            return Accepted(usuario);
+            return Accepted(pessoaFisica);
         }
 
         [HttpPut("AtualizarAsync")]
-        public IActionResult Atualizar([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] Usuario usuario,
-            [FromServices] IValidator<Usuario> validator)
+        public IActionResult Atualizar([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] PessoaFisica pessoaFisica,
+            [FromServices] IValidator<PessoaFisica> validator)
         {
-            var validationResult = validator.Validate(usuario);
+            var validationResult = validator.Validate(pessoaFisica);
 
             if (!validationResult.IsValid)
             {
