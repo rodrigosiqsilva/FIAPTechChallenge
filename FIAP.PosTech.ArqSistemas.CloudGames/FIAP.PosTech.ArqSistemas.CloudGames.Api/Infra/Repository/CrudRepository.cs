@@ -38,7 +38,7 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Repository
             _context.SaveChanges();
         }
 
-        IList<T> ICrudRepository<T>.BuscarPorTodos()
+        IList<T> ICrudRepository<T>.BuscarTodos()
         {
             return _dbSet.ToList();
         }

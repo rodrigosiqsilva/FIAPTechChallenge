@@ -11,6 +11,6 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces
         void Excluir(int id);
 
         T BuscarPorId(int id);
-        IList<T> BuscarPorTodos();
+        IList<T> BuscarTodos();
     }
 }
