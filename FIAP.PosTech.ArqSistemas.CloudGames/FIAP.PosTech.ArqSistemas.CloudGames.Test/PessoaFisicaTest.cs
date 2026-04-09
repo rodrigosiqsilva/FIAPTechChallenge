@@ -36,11 +36,11 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Test
         {
             // Arrange
             var pessoaFisica = GetPessoaFisicaFaker();
-
-            // Act
             var infraTest = new InfraTest();
             var tokenAdminValido = await infraTest.GetTokenAdmin();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenAdminValido);
+
+            // Act
             var response = await _client.PostAsJsonAsync("/PessoaFisica/Incluir", pessoaFisica);
 
             // Assert
@@ -60,11 +60,11 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Test
             // Arrange
             var pessoaFisica = GetPessoaFisicaFaker();
             var pessoaFisicaUpdate = GetPessoaFisicaFaker();
-
-            // Act
             var infraTest = new InfraTest();
             var tokenAdminValido = await infraTest.GetTokenAdmin();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenAdminValido);
+
+            // Act
             var response = await _client.PostAsJsonAsync("/PessoaFisica/Incluir", pessoaFisica);
 
             // Assert
@@ -90,11 +90,11 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Test
         {
             // Arrange
             var pessoaFisica = GetPessoaFisicaFaker();
-
-            // Act
             var infraTest = new InfraTest();
             var tokenAdminValido = await infraTest.GetTokenAdmin();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenAdminValido);
+
+            // Act
             var response = await _client.PostAsJsonAsync("/PessoaFisica/Incluir", pessoaFisica);
 
             // Assert
@@ -120,11 +120,11 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Test
         {
             // Arrange
             List<PessoaFisica> pessoaFisicas;
-
-            // Act
             var infraTest = new InfraTest();
             var tokenAdminValido = await infraTest.GetTokenAdmin();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenAdminValido);
+
+            // Act
             var response = await _client.GetAsync($"/PessoaFisica/BuscarTodos");
 
             // Assert

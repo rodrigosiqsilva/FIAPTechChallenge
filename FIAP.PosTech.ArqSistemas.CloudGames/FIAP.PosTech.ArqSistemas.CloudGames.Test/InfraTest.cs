@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,6 +46,12 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Test
                 return credencial.Token;
             }
             return null;
+        }
+
+        public async Task<AuthenticationHeaderValue> GetAutenticationAdmin()
+        {
+            var tokenAdminValido = await GetTokenAdmin();
+            return new AuthenticationHeaderValue("Bearer", tokenAdminValido);  
         }
 
         public async Task<string?> GetTokenUser()

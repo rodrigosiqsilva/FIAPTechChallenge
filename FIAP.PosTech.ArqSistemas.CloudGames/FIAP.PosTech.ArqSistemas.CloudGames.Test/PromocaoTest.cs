@@ -38,11 +38,11 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Test
         {
             // Arrange
             var promocao = GetPromocaoFaker();
-
-            // Act
             var infraTest = new InfraTest();
             var tokenAdminValido = await infraTest.GetTokenAdmin();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenAdminValido);
+
+            // Act
             var response = await _client.PostAsJsonAsync("/Promocao/Incluir", promocao);
 
             // Assert
@@ -62,11 +62,11 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Test
             // Arrange
             var promocao = GetPromocaoFaker();
             var promocaoUpdate = GetPromocaoFaker();
-
-            // Act
             var infraTest = new InfraTest();
             var tokenAdminValido = await infraTest.GetTokenAdmin();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenAdminValido);
+
+            // Act
             var response = await _client.PostAsJsonAsync("/Promocao/Incluir", promocao);
 
             // Assert
@@ -92,11 +92,11 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Test
         {
             // Arrange
             var promocao = GetPromocaoFaker();
-
-            // Act
             var infraTest = new InfraTest();
             var tokenAdminValido = await infraTest.GetTokenAdmin();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenAdminValido);
+
+            // Act
             var response = await _client.PostAsJsonAsync("/Promocao/Incluir", promocao);
 
             // Assert
@@ -122,11 +122,11 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Test
         {
             // Arrange
             List<Promocao> promocoes;
-
-            // Act
             var infraTest = new InfraTest();
             var tokenAdminValido = await infraTest.GetTokenAdmin();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenAdminValido);
+
+            // Act
             var response = await _client.GetAsync($"/Promocao/BuscarTodos");
 
             // Assert
