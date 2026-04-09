@@ -1,33 +1,44 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Log;
+using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Repository;
+using FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces;
+using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 
 namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
 {
-    public class AutenticacaoController(IConfiguration configuration) : Controller
+    public class AutenticacaoController(IPessoaFisicaRepository pessoaFisicaRepository, IConfiguration configuration, 
+        ICorrelationIdGenerator correlationIdGenerator, BaseLogger<PessoaFisicaController> logger) : Controller
     {
 
         private readonly IConfiguration _configuration = configuration;
+        private readonly IPessoaFisicaRepository _pessoaFisicaRepository = pessoaFisicaRepository;
+        private readonly ICorrelationIdGenerator _correlationIdGenerator = correlationIdGenerator;
+        private readonly BaseLogger<PessoaFisicaController> _logger = logger;
 
 
-        [HttpPost("login")]
-        public IActionResult Login(string email, string senha)
+        [HttpPost("Login")]
+        public IActionResult Login([FromBody] Login login)
         {
-            if ((email == "rodrigosiqueirasilva@hotmail.com") && (senha == "123@abC!!"))
+            _logger.LogInformation($"Iniciando autenticação do usuário: {login.Email} senha: {login.Senha}");
+            var result = _pessoaFisicaRepository.Autenticar(login.Email, login.Senha);
+
+            if (result != null)
             {
-                var token = GenerateToken(email, "Admin");
-                return Ok(new { token });
-            }
-            else if ((email == "fisioterapeuta@hotmail.com") && (senha == "123@abC!!"))
-            {
-                var token = GenerateToken(email, "User");
+                _logger.LogInformation($"Usuário autenticado com sucesso: {JsonSerializer.Serialize(result)}");
+                    
+                var token = GenerateToken(login.Email, result.Administrador ? "Admin" : "User");
                 return Ok(new { token });
             }
             else
             {
-                return Unauthorized(); 
+                _logger.LogInformation($"Usuário não autenticado");
+                return Unauthorized();
             }
         }
 

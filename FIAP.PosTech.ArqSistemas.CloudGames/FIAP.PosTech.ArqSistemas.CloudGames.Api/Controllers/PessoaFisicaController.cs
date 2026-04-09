@@ -1,4 +1,4 @@
-﻿using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra;
+﻿using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Log;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Interfaces;
 using FIAP.PosTech.ArqSistemas.CloudGames.Domain.Model;
 using FluentValidation;
@@ -12,17 +12,16 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PessoaFisicaController(IPessoaFisicaRepository pessoaFisicaRepository, ICorrelationIdGenerator correlationIdGenerator,
-        BaseLogger<PessoaFisicaController> logger) :
+    public class PessoaFisicaController(IPessoaFisicaRepository pessoaFisicaRepository, BaseLogger<PessoaFisicaController> logger) :
         ControllerBase
     {
         private readonly IPessoaFisicaRepository _pessoaFisicaRepository = pessoaFisicaRepository;
-        private readonly ICorrelationIdGenerator _correlationIdGenerator = correlationIdGenerator;
         private readonly BaseLogger<PessoaFisicaController> _logger = logger;
 
 
         [HttpGet("BuscarTodos")]
-        public async Task<IActionResult> BuscarTodos([FromServices] ICorrelationIdGenerator correlationIdGenerator)
+        [Authorize(Policy = "Admin")]
+        public Task<IActionResult> BuscarTodos()
         {
             _logger.LogInformation("Iniciando busca por todos as pessoas físicas");
             var result = _pessoaFisicaRepository.BuscarTodos();
@@ -30,17 +29,18 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
             if ((result != null) && (result.Count > 0))
             {
                 _logger.LogInformation($"Busca realizada com sucesso: {JsonSerializer.Serialize(result)}");
-                return Ok(result); 
+                return Task.FromResult<IActionResult>(Ok(result)); 
             }
             else
             {
                 _logger.LogInformation($"Busca realizada com sucesso: Não há pessoas físicas cadastradas");
-                return NotFound();
+                return Task.FromResult<IActionResult>(NotFound());
             }    
         }
 
         [HttpGet("BuscarPorId/{id:int}")]
-        public async Task<IActionResult> BuscarPorId([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromRoute] int id)
+        [Authorize(Policy = "Admin")]
+        public Task<IActionResult> BuscarPorId([FromRoute] int id)
         {
             _logger.LogInformation($"Iniciando busca por pessoa física id {id}");
             var result = _pessoaFisicaRepository.BuscarPorId(id);
@@ -48,19 +48,18 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
             if (result != null) 
             {
                 _logger.LogInformation($"Busca realizada com sucesso: {JsonSerializer.Serialize(result)}");
-                return Ok(result);
+                return Task.FromResult<IActionResult>(Ok(result));
             }
             else
             {
                 _logger.LogInformation($"Busca realizada com sucesso: Pessoa física não cadastrada");
-                return NotFound();
+                return Task.FromResult<IActionResult>(NotFound());
             }
         }
 
         [HttpPost("Incluir")]
-        //[Authorize(Policy = "Admin")]
-        public IActionResult Incluir([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] PessoaFisica pessoaFisica,
-            [FromServices] IValidator<PessoaFisica> validator)
+        [Authorize(Policy = "Admin")]
+        public IActionResult Incluir([FromBody] PessoaFisica pessoaFisica, [FromServices] IValidator<PessoaFisica> validator)
         {
             try
             {
@@ -76,7 +75,7 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
                 _pessoaFisicaRepository.Incluir(pessoaFisica);
                 _logger.LogInformation($"Dados da pessoa física adicionados com sucesso");
 
-                return Ok();
+                return Ok(pessoaFisica);
 
             }
             catch (Exception ex)
@@ -86,8 +85,8 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
         }
 
         [HttpPut("Atualizar")]
-        public IActionResult Atualizar([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromBody] PessoaFisica pessoaFisica,
-            [FromServices] IValidator<PessoaFisica> validator)
+        [Authorize(Policy = "Admin")]
+        public IActionResult Atualizar([FromBody] PessoaFisica pessoaFisica, [FromServices] IValidator<PessoaFisica> validator)
         {
             try
             {
@@ -126,7 +125,8 @@ namespace FIAP.PosTech.ArqSistemas.CloudGames.Api.Controllers
         }
 
         [HttpDelete("Excluir/{id:int}")]
-        public IActionResult Excluir([FromServices] ICorrelationIdGenerator correlationIdGenerator, [FromRoute] int id)
+        [Authorize(Policy = "Admin")]
+        public IActionResult Excluir([FromRoute] int id)
         {
             try
             {

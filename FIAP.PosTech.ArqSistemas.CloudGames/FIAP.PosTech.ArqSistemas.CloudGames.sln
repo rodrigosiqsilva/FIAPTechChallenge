@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAP.PosTech.ArqSistemas.CloudGames.Api", "FIAP.PosTech.ArqSistemas.CloudGames.Api\FIAP.PosTech.ArqSistemas.CloudGames.Api.csproj", "{111B7449-6D6E-DAD2-BCAD-BDB261841DB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAP.PosTech.ArqSistemas.CloudGames.Test", "FIAP.PosTech.ArqSistemas.CloudGames.Test\FIAP.PosTech.ArqSistemas.CloudGames.Test.csproj", "{D8CD460B-7D91-4BC4-AC29-E76827176BA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{111B7449-6D6E-DAD2-BCAD-BDB261841DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{111B7449-6D6E-DAD2-BCAD-BDB261841DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{111B7449-6D6E-DAD2-BCAD-BDB261841DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8CD460B-7D91-4BC4-AC29-E76827176BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8CD460B-7D91-4BC4-AC29-E76827176BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8CD460B-7D91-4BC4-AC29-E76827176BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8CD460B-7D91-4BC4-AC29-E76827176BA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -33,6 +39,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7F512891-6285-4519-B6B2-FDB0EFD4BD5D} = {8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}
 		{111B7449-6D6E-DAD2-BCAD-BDB261841DB1} = {8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}
+		{D8CD460B-7D91-4BC4-AC29-E76827176BA8} = {8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77510C5B-B3CC-4B42-A41D-586C43D257C0}

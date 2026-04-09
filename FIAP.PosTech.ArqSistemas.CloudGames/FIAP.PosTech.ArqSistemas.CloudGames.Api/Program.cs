@@ -1,4 +1,3 @@
-using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Documentation;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Log;
 using FIAP.PosTech.ArqSistemas.CloudGames.Api.Infra.Middleware;
@@ -93,6 +92,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("User", policy => policy.RequireRole("User"));
 
 #endregion
 
