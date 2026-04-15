@@ -31,8 +31,4 @@
     <ProjectReference Include="..\FIAP.PosTech.ArqSistemas.CloudGames.Domain\FIAP.PosTech.ArqSistemas.CloudGames.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
